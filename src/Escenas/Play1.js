@@ -26,19 +26,11 @@ class Play extends Phaser.Scene{
             blendMode: 'ADD'
         });
         
-        const shoots = this.add.particles(25, 0, 'shoot', {
-            speed: 100,
-            angle : { min: 0, max: 0 },
-            scale: { start: 0.5, end: 0 },
-            blendMode: 'ADD'
-        });
-
         this.player.setBounce(0.2);
         this.player.setCollideWorldBounds(true);
 
         particles.startFollow(this.player);
         particles2.startFollow(this.player);
-        shoots.startFollow(this.player);
 
         this.anims.create({
             key: 'left',
@@ -61,7 +53,7 @@ class Play extends Phaser.Scene{
         }); 
         this.anims.create({
             key: 'up',
-            frames: [ { key: 'nave', frame: 0 } ],
+            frames: this.anims.generateFrameNumbers('nave', { start: 2, end: 2 }),
             frameRate: 10,
             repeat: -1
         }); 
