@@ -72,6 +72,27 @@ class Play extends Phaser.Scene {
             enemy.setVelocity(Phaser.Math.Between(-100, -150), 0); // Velocidad X aleatoria dentro del rango -100 a -150
         
         }
+
+        this.data.set('vida', 3);
+        this.data.set('nivel', 1);
+        this.data.set('puntaje', 0);
+
+        var nivelVida = this.add.text(0, 5, '', { font: '30px Courier', fill: '#BF360C' }); 
+
+        nivelVida.setText([         
+            'Nivel: ' + this.data.get('nivel'),
+            'Vida: ' + this.data.get('vida'),
+        ]);
+
+        var puntaje = this.add.text(550, 5, '', { font: '30px Courier', fill: '#BF360C' });
+
+        puntaje.setText([
+            'Puntaje: ' + this.data.get('puntaje')
+        ]);
+
+
+        
+        
     }
 
 
