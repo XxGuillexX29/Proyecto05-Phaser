@@ -12,7 +12,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 0 }, //Gravedad del juego
+            gravity: { y: 0}, //Gravedad del juego
             debug: true // muestra los hitbox de los componentes del juego
         }
     },
