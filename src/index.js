@@ -16,7 +16,8 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 }, //Gravedad del juego
-            debug: false // muestra los hitbox de los componentes del juego
+            debug: false// muestra los hitbox de los componentes del juego
+
         }
     },
     scene: [Menu, Play, Play2, Congratulations, GameOver]
@@ -25,4 +26,6 @@ let config = {
 let game = new Phaser.Game(config);
 
 /*let nave;
-let enemy;*/
+let enemy;
+let disparo;*/
+
