@@ -1,5 +1,8 @@
+import Menu from './Escenas/menu.js';
 import Play from './Escenas/Play1.js';
-/*import Play from './Escenas/Play2.js';*/
+import Play2 from './Escenas/Play2.js';
+import Congratulations from './Escenas/Congratulations.js';
+import GameOver from './Escenas/GameOver.js';
 
 let config = {
     type: Phaser.AUTO,
@@ -13,10 +16,10 @@ let config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 }, //Gravedad del juego
-            debug: true // muestra los hitbox de los componentes del juego
+            debug: false // muestra los hitbox de los componentes del juego
         }
     },
-    scene: [Play]
+    scene: [Menu, Play, Play2, Congratulations, GameOver]
 };
 
 let game = new Phaser.Game(config);

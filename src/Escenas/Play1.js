@@ -1,9 +1,9 @@
 class Play extends Phaser.Scene {
     constructor() {
-        super("Play"); //nombre de la escena
+        super("Play"); //nombre de la escena           	
     }
     preload() {
-        this.load.image('sky', '../public/img/sky.png'); // ubicacion de imagen del fondo
+        this.load.image('sky', '../public/img/juego.jpg'); // ubicacion de imagen del fondo
         this.load.image('red', '../public/img/red.png'); // ubicacion de imagen para las particulas
         this.load.image('shoot', '../public/img/shoot.png'); // ubicacion de imagen para el disparo de la NAVE
         this.load.image('shootEnemy', '../public/img/shootEnemy.png'); // ubicacion de imagen para el disparo del enemigo
@@ -11,9 +11,9 @@ class Play extends Phaser.Scene {
         this.load.image('enemy', '../public/img/enemy.png'); // ubicacion y medidas de imagen del enemigo
     }
     create() {
-        let fondo = this.add.image(400, 300, 'sky'); //Agregado de fondo de escena  
+        this.add.image(400, 300, 'sky'); //Agregado de fondo de escena  
 
-        let player = this.player = this.physics.add.sprite(100, 300, 'nave');
+        this.player = this.physics.add.sprite(100, 300, 'nave');
 
         const particles = this.add.particles(-25, 10, 'red', {
             speed: 40,
@@ -31,6 +31,13 @@ class Play extends Phaser.Scene {
         this.player.setBounce(0.2);
         this.player.setCollideWorldBounds(true);
 
+        this.balas = this.add.group();
+        this.balas.enableBody = true;
+        this.balas.physicsBodyType = Phaser.Physics.ARCADE;
+        this.balas.createMultiple(10,'bullet');			
+        this.balas.setAll("outOfBoundsKill ", true);
+        this.balas.setAll("checkWorldBounds", true);	
+        
         particles.startFollow(this.player);
         particles2.startFollow(this.player);
 
@@ -61,11 +68,12 @@ class Play extends Phaser.Scene {
         });
 
         this.cursors = this.input.keyboard.createCursorKeys();
+        console.log(this.cursors);
                 
         this.enemies = this.physics.add.group(); // Crea un grupo de enemigos
         
         for (let i = 0; i < 5; i++) { // Cambia el 5 por el número de enemigos que quieras generar
-            let x = Phaser.Math.Between(0, 800);  // Ajusta la aparicion de los enemigos sobre X
+            let x = Phaser.Math.Between(700, 1200);  // Ajusta la aparicion de los enemigos sobre X
             let y = Phaser.Math.Between(50, 550); // Ajusta la altura según sea necesario
             let enemy = this.enemies.create(x, y, 'enemy');
             enemy.setSize(30, 30); // Ajusta el tamaño del box collider
@@ -74,8 +82,6 @@ class Play extends Phaser.Scene {
         }
     }
 
-
-
     update() {
         if (this.cursors.left.isDown) 
         {
@@ -83,13 +89,13 @@ class Play extends Phaser.Scene {
 
             this.player.anims.play('left', true);
         }
-        else if (this.cursors.right.isDown) 
+        if (this.cursors.right.isDown) 
         {
             this.player.setVelocityX(100);
 
             this.player.anims.play('right', true);
         }
-        else if (this.cursors.down.isDown) 
+        if (this.cursors.down.isDown) 
         {
 
             this.player.setVelocityY(100);
@@ -97,12 +103,10 @@ class Play extends Phaser.Scene {
             this.player.anims.play('down', true);
         }
 
-        else if (this.cursors.up.isDown) {
+         if (this.cursors.up.isDown) {
             this.player.setVelocityY(-100);
             this.player.anims.play('up', true);
         }
     }
 }
-
-
 export default Play;
