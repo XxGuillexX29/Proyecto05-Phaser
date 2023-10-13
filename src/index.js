@@ -1,5 +1,8 @@
+import Menu from './Escenas/menu.js';
 import Play from './Escenas/Play1.js';
-/*import Play from './Escenas/Play2.js';*/
+import Play2 from './Escenas/Play2.js';
+import Congratulations from './Escenas/Congratulations.js';
+import GameOver from './Escenas/GameOver.js';
 
 let config = {
     type: Phaser.AUTO,
@@ -17,7 +20,7 @@ let config = {
 
         }
     },
-    scene: [Play]
+    scene: [Menu, Play, Play2, Congratulations, GameOver]
 };
 
 let game = new Phaser.Game(config);

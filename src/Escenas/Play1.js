@@ -1,16 +1,15 @@
 class Play extends Phaser.Scene {
     
     constructor() {
-        super({key: "Play"}); //nombre de la escena
-        
+
+        super("Play"); //nombre de la escena           	   
         this.scoreText = "";
         this.score = 0;
-
         this.vidaText = "";
         this.vida = 100;
     }
     preload() {
-        this.load.image('sky', '../public/img/sky.png'); // ubicacion de imagen del fondo
+        this.load.image('sky', '../public/img/juego.jpg'); // ubicacion de imagen del fondo
         this.load.image('red', '../public/img/red.png'); // ubicacion de imagen para las particulas
         this.load.image('shoot', '../public/img/shoot.png'); // ubicacion de imagen para el disparo de la NAVE
         this.load.image('shootEnemy', '../public/img/shootEnemy.png'); // ubicacion de imagen para el disparo del enemigo
@@ -19,6 +18,11 @@ class Play extends Phaser.Scene {
     }
     create() {
 
+        this.add.image(400, 300, 'sky'); //Agregado de fondo de escena  
+
+        this.player = this.physics.add.sprite(100, 300, 'nave');
+
+
          // crea el disparo 
         this.input.keyboard.on('keydown', (event) => {
             if (event.keyCode === 32) {
@@ -26,7 +30,8 @@ class Play extends Phaser.Scene {
             }
         });
 
-        this.add.image(400, 300, 'sky'); //Agregado de fondo de escena  
+
+
 
         this.player = this.physics.add.sprite(100, 300, 'nave');
         
@@ -52,7 +57,6 @@ class Play extends Phaser.Scene {
             callbackScope:this,
             repeat:-1
         });
-
         particles.startFollow(this.player);
         particles2.startFollow(this.player);
 
@@ -83,9 +87,16 @@ class Play extends Phaser.Scene {
             repeat: -1
         });
 
-         this.physics.add.collider(this.player, this.enemies);
 
-         this.cursors = this.input.keyboard.createCursorKeys();
+        this.cursors = this.input.keyboard.createCursorKeys();
+        console.log(this.cursors);
+                
+        this.enemies = this.physics.add.group(); // Crea un grupo de enemigos
+        
+        for (let i = 0; i < 5; i++) { // Cambia el 5 por el número de enemigos que quieras generar
+            let x = Phaser.Math.Between(700, 1200);  // Ajusta la aparicion de los enemigos sobre X
+
+         this.physics.add.collider(this.player, this.enemies);
 
          //Para controlar el puntaje
          this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -131,6 +142,7 @@ class Play extends Phaser.Scene {
         
         for (let i = 0; i < 5; i++) { // Cambia el 5 por el número de enemigos que quieras generar
             let x = Phaser.Math.Between(800, 850);  // Ajusta la aparicion de los enemigos sobre X
+
             let y = Phaser.Math.Between(50, 550); // Ajusta la altura según sea necesario
             let enemy = this.enemies.create(x, y, 'enemy');
           
@@ -156,6 +168,8 @@ class Play extends Phaser.Scene {
 
         
 
+
+
         /*let disparo =  this.add.image(400, 300, 'shoot'); 
 
         this.input.on('pointerdown', () => this.diparo());
@@ -177,7 +191,6 @@ class Play extends Phaser.Scene {
         
         
     }      
-    
 
     update() {
 
@@ -203,12 +216,14 @@ class Play extends Phaser.Scene {
 
             this.player.anims.play('left', true);
         }
+
         else if (this.cursors.right.isDown) {
 
             this.player.setVelocityX(100);
 
             this.player.anims.play('right', true);
         }
+
         else if (this.cursors.down.isDown) {
 
             this.player.setVelocityY(100);
@@ -331,4 +346,5 @@ class Play extends Phaser.Scene {
         }*/
 }
 
+  
 export default Play;
