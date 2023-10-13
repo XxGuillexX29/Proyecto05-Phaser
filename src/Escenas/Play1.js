@@ -43,7 +43,7 @@ class Play extends Phaser.Scene {
             blendMode: 'ADD'
         });
 
-        this.player.setBounce(0.2);
+        this.player.setBounce(0.0);
         this.player.setCollideWorldBounds(true);
 
         this.time.addEvent({
@@ -223,6 +223,7 @@ class Play extends Phaser.Scene {
             this.player.anims.play('up', true);
         }
 
+
         
 
     }
@@ -248,7 +249,11 @@ class Play extends Phaser.Scene {
             // Hace que el enemigo se destruya cuando sale de la pantalla
             enemy.outOfBoundsKill = true;
         }
-
+        else if (this.cursors) {
+            this.player.setVelocityY(0);
+            this.player.setVelocity(0);
+            this.player.anims.play('left', true);
+        }
 
     }
 

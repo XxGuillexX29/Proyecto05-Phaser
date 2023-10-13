@@ -14,6 +14,7 @@ let config = {
         arcade: {
             gravity: { y: 0 }, //Gravedad del juego
             debug: false// muestra los hitbox de los componentes del juego
+
         }
     },
     scene: [Play]
