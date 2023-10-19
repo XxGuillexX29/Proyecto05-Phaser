@@ -2,8 +2,8 @@ class Play2 extends Phaser.Scene {
     constructor() {
         super("Play2");
     }
-}
-  /*  preload() {
+
+    preload() {
         this.load.image('tierra', '../public/img/desierto.png');
         this.load.image('red', '../public/img/red.png');
         this.load.image('shoot', '../public/img/shoot.png');
@@ -127,5 +127,5 @@ class Play2 extends Phaser.Scene {
         this.scene.start('Creditos'); // Cambia 'Creditos' por el nombre de tu escena de créditos
     }
       
-}*/
+}
 export default Play2;

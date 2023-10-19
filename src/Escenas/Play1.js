@@ -1,3 +1,6 @@
+import Play2 from "./Play2.js";
+import GameOver from "./GameOver.js";
+
 class Play extends Phaser.Scene {
     
     constructor() {
@@ -33,7 +36,7 @@ class Play extends Phaser.Scene {
 
 
 
-        this.player = this.physics.add.sprite(100, 300, 'nave');
+        
         
         const particles = this.add.particles(-25, 10, 'red', {
             speed: 40,
@@ -99,9 +102,9 @@ class Play extends Phaser.Scene {
          this.physics.add.collider(this.player, this.enemies);
 
          //Para controlar el puntaje
-         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+         this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#fff' });
          //se crea el puntaje 
-         this.vidaText = this.add.text(16,50,'Vida: 100',{fontSize : '32px',fill: '#000'});
+         this.vidaText = this.add.text(16,50,'Vida: 100',{fontSize : '32px',fill: '#fff'});
 
         
 
@@ -191,21 +194,19 @@ class Play extends Phaser.Scene {
         
         
     }      
-
+    }
     update() {
 
                         //si llega a puntaje 200 pasa de nivel
                         if (this.score == 200) {
-                            this.gameMusic.destroy();
-                            this.scene.start('Escena2', { score: this.score });
+                            this.scene.start('Play2', { score: this.score });
                             console.log("cambio escena");
                         }
 
                         //si pierde todas las vidas
                         if (this.vida == 0) {
 
-                            this.scene.start('FinDelJuego');
-                            this.gameMusic.destroy();
+                            this.scene.start('GameOver');
                             console.log("game over");
                             //this.scene.start('End',{puntaje:this.puntaje}); PARA LLEVAR EL PUNTAJE
                         }
@@ -264,7 +265,7 @@ class Play extends Phaser.Scene {
             // Hace que el enemigo se destruya cuando sale de la pantalla
             enemy.outOfBoundsKill = true;
         }
-        else if (this.cursors) {
+        if (this.cursors) {
             this.player.setVelocityY(0);
             this.player.setVelocity(0);
             this.player.anims.play('left', true);
